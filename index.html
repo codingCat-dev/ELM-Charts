@@ -8236,17 +8236,263 @@ var $author$project$Main$data = _List_fromArray(
 		{calories: 47.0, kj: 197.0, x: 3},
 		{calories: 88.0, kj: 478.0, x: 4}
 	]);
+var $terezka$elm_charts$Chart$Attributes$fontSize = F2(
+	function (v, config) {
+		return _Utils_update(
+			config,
+			{
+				fontSize: $elm$core$Maybe$Just(v)
+			});
+	});
+var $terezka$elm_charts$Chart$Attributes$format = F2(
+	function (v, config) {
+		return _Utils_update(
+			config,
+			{
+				format: $elm$core$Maybe$Just(v)
+			});
+	});
 var $terezka$elm_charts$Chart$Attributes$height = F2(
 	function (v, config) {
 		return _Utils_update(
 			config,
 			{height: v});
 	});
+var $terezka$elm_charts$Chart$SvgElement = function (a) {
+	return {$: 'SvgElement', a: a};
+};
+var $terezka$elm_charts$Internal$Svg$defaultLabel = {anchor: $elm$core$Maybe$Nothing, attrs: _List_Nil, border: 'white', borderWidth: 0, color: '#808BAB', ellipsis: $elm$core$Maybe$Nothing, fontSize: $elm$core$Maybe$Nothing, hideOverflow: false, rotate: 0, uppercase: false, xOff: 0, yOff: 0};
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$svg$Svg$foreignObject = $elm$svg$Svg$trustedNode('foreignObject');
+var $terezka$elm_charts$Internal$Svg$position = F6(
+	function (plane, rotation, x_, y_, xOff_, yOff_) {
+		return $elm$svg$Svg$Attributes$transform(
+			'translate(' + ($elm$core$String$fromFloat(
+				A2($terezka$elm_charts$Internal$Coordinates$toSVGX, plane, x_) + xOff_) + (',' + ($elm$core$String$fromFloat(
+				A2($terezka$elm_charts$Internal$Coordinates$toSVGY, plane, y_) + yOff_) + (') rotate(' + ($elm$core$String$fromFloat(rotation) + ')'))))));
+	});
+var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
+var $elm$svg$Svg$tspan = $elm$svg$Svg$trustedNode('tspan');
+var $terezka$elm_charts$Internal$Svg$label = F4(
+	function (plane, config, inner, point) {
+		var _v0 = config.ellipsis;
+		if (_v0.$ === 'Nothing') {
+			var withOverflowWrap = function (el) {
+				return config.hideOverflow ? A2(
+					$elm$svg$Svg$g,
+					_List_fromArray(
+						[
+							$terezka$elm_charts$Internal$Svg$withinChartArea(plane)
+						]),
+					_List_fromArray(
+						[el])) : el;
+			};
+			var uppercaseStyle = config.uppercase ? 'text-transform: uppercase;' : '';
+			var fontStyle = function () {
+				var _v5 = config.fontSize;
+				if (_v5.$ === 'Just') {
+					var size_ = _v5.a;
+					return 'font-size: ' + ($elm$core$String$fromInt(size_) + 'px;');
+				} else {
+					return '';
+				}
+			}();
+			var anchorStyle = function () {
+				var _v1 = config.anchor;
+				if (_v1.$ === 'Nothing') {
+					return 'text-anchor: middle;';
+				} else {
+					switch (_v1.a.$) {
+						case 'End':
+							var _v2 = _v1.a;
+							return 'text-anchor: end;';
+						case 'Start':
+							var _v3 = _v1.a;
+							return 'text-anchor: start;';
+						default:
+							var _v4 = _v1.a;
+							return 'text-anchor: middle;';
+					}
+				}
+			}();
+			return withOverflowWrap(
+				A4(
+					$terezka$elm_charts$Internal$Svg$withAttrs,
+					config.attrs,
+					$elm$svg$Svg$text_,
+					_List_fromArray(
+						[
+							$elm$svg$Svg$Attributes$class('elm-charts__label'),
+							$elm$svg$Svg$Attributes$stroke(config.border),
+							$elm$svg$Svg$Attributes$strokeWidth(
+							$elm$core$String$fromFloat(config.borderWidth)),
+							$elm$svg$Svg$Attributes$fill(config.color),
+							A6($terezka$elm_charts$Internal$Svg$position, plane, -config.rotate, point.x, point.y, config.xOff, config.yOff),
+							$elm$svg$Svg$Attributes$style(
+							A2(
+								$elm$core$String$join,
+								' ',
+								_List_fromArray(
+									['pointer-events: none;', fontStyle, anchorStyle, uppercaseStyle])))
+						]),
+					_List_fromArray(
+						[
+							A2($elm$svg$Svg$tspan, _List_Nil, inner)
+						])));
+		} else {
+			var ellipsis = _v0.a;
+			var xOffWithAnchor = function () {
+				var _v11 = config.anchor;
+				if (_v11.$ === 'Nothing') {
+					return config.xOff - (ellipsis.width / 2);
+				} else {
+					switch (_v11.a.$) {
+						case 'End':
+							var _v12 = _v11.a;
+							return config.xOff - ellipsis.width;
+						case 'Start':
+							var _v13 = _v11.a;
+							return config.xOff;
+						default:
+							var _v14 = _v11.a;
+							return config.xOff - (ellipsis.width / 2);
+					}
+				}
+			}();
+			var withOverflowWrap = function (el) {
+				return config.hideOverflow ? A2(
+					$elm$svg$Svg$g,
+					_List_fromArray(
+						[
+							$terezka$elm_charts$Internal$Svg$withinChartArea(plane)
+						]),
+					_List_fromArray(
+						[el])) : el;
+			};
+			var uppercaseStyle = config.uppercase ? A2($elm$html$Html$Attributes$style, 'text-transform', 'uppercase') : A2($elm$html$Html$Attributes$style, '', '');
+			var fontStyle = function () {
+				var _v10 = config.fontSize;
+				if (_v10.$ === 'Just') {
+					var size_ = _v10.a;
+					return A2(
+						$elm$html$Html$Attributes$style,
+						'font-size',
+						$elm$core$String$fromInt(size_) + 'px');
+				} else {
+					return A2($elm$html$Html$Attributes$style, '', '');
+				}
+			}();
+			var anchorStyle = function () {
+				var _v6 = config.anchor;
+				if (_v6.$ === 'Nothing') {
+					return A2($elm$html$Html$Attributes$style, 'text-align', 'center');
+				} else {
+					switch (_v6.a.$) {
+						case 'End':
+							var _v7 = _v6.a;
+							return A2($elm$html$Html$Attributes$style, 'text-align', 'right');
+						case 'Start':
+							var _v8 = _v6.a;
+							return A2($elm$html$Html$Attributes$style, 'text-align', 'left');
+						default:
+							var _v9 = _v6.a;
+							return A2($elm$html$Html$Attributes$style, 'text-align', 'center');
+					}
+				}
+			}();
+			return withOverflowWrap(
+				A4(
+					$terezka$elm_charts$Internal$Svg$withAttrs,
+					config.attrs,
+					$elm$svg$Svg$foreignObject,
+					_List_fromArray(
+						[
+							$elm$svg$Svg$Attributes$class('elm-charts__label'),
+							$elm$svg$Svg$Attributes$class('elm-charts__html-label'),
+							$elm$svg$Svg$Attributes$width(
+							$elm$core$String$fromFloat(ellipsis.width)),
+							$elm$svg$Svg$Attributes$height(
+							$elm$core$String$fromFloat(ellipsis.height)),
+							A6($terezka$elm_charts$Internal$Svg$position, plane, -config.rotate, point.x, point.y, xOffWithAnchor, config.yOff - 10)
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									A2($elm$html$Html$Attributes$attribute, 'xmlns', 'http://www.w3.org/1999/xhtml'),
+									A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
+									A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
+									A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis'),
+									A2($elm$html$Html$Attributes$style, 'height', '100%'),
+									A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+									A2($elm$html$Html$Attributes$style, 'color', config.color),
+									fontStyle,
+									uppercaseStyle,
+									anchorStyle
+								]),
+							inner)
+						])));
+		}
+	});
+var $terezka$elm_charts$Chart$Svg$label = F2(
+	function (plane, edits) {
+		return A2(
+			$terezka$elm_charts$Internal$Svg$label,
+			plane,
+			A2($terezka$elm_charts$Internal$Helpers$apply, edits, $terezka$elm_charts$Internal$Svg$defaultLabel));
+	});
+var $terezka$elm_charts$Chart$labelAt = F4(
+	function (toX, toY, attrs, inner) {
+		return $terezka$elm_charts$Chart$SvgElement(
+			function (p) {
+				return A4(
+					$terezka$elm_charts$Chart$Svg$label,
+					p,
+					attrs,
+					inner,
+					{
+						x: toX(p.x),
+						y: toY(p.y)
+					});
+			});
+	});
+var $author$project$Main$labels = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(1, 'Apple'),
+			_Utils_Tuple2(2, 'Avocado'),
+			_Utils_Tuple2(3, 'Clementine'),
+			_Utils_Tuple2(4, 'Chirimoya')
+		]));
+var $author$project$Main$labelFor = function (x) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		A2($elm$core$Dict$get, x, $author$project$Main$labels));
+};
 var $terezka$elm_charts$Chart$Attributes$margin = F2(
 	function (v, config) {
 		return _Utils_update(
 			config,
 			{margin: v});
+	});
+var $terezka$elm_charts$Chart$Attributes$middle = function (b) {
+	return b.min + ((b.max - b.min) / 2);
+};
+var $terezka$elm_charts$Chart$Attributes$moveUp = F2(
+	function (v, config) {
+		return _Utils_update(
+			config,
+			{yOff: config.yOff - v});
 	});
 var $terezka$elm_charts$Chart$Attributes$withGrid = function (config) {
 	return _Utils_update(
@@ -8258,7 +8504,6 @@ var $terezka$elm_charts$Chart$LabelsElement = F3(
 	function (a, b, c) {
 		return {$: 'LabelsElement', a: a, b: b, c: c};
 	});
-var $terezka$elm_charts$Internal$Svg$defaultLabel = {anchor: $elm$core$Maybe$Nothing, attrs: _List_Nil, border: 'white', borderWidth: 0, color: '#808BAB', ellipsis: $elm$core$Maybe$Nothing, fontSize: $elm$core$Maybe$Nothing, hideOverflow: false, rotate: 0, uppercase: false, xOff: 0, yOff: 0};
 var $elm$core$Basics$composeL = F3(
 	function (g, f, x) {
 		return g(
@@ -10771,187 +11016,6 @@ var $terezka$elm_charts$Chart$generateValues = F4(
 						axis));
 		}
 	});
-var $elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
-var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
-var $elm$svg$Svg$foreignObject = $elm$svg$Svg$trustedNode('foreignObject');
-var $terezka$elm_charts$Internal$Svg$position = F6(
-	function (plane, rotation, x_, y_, xOff_, yOff_) {
-		return $elm$svg$Svg$Attributes$transform(
-			'translate(' + ($elm$core$String$fromFloat(
-				A2($terezka$elm_charts$Internal$Coordinates$toSVGX, plane, x_) + xOff_) + (',' + ($elm$core$String$fromFloat(
-				A2($terezka$elm_charts$Internal$Coordinates$toSVGY, plane, y_) + yOff_) + (') rotate(' + ($elm$core$String$fromFloat(rotation) + ')'))))));
-	});
-var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
-var $elm$svg$Svg$tspan = $elm$svg$Svg$trustedNode('tspan');
-var $terezka$elm_charts$Internal$Svg$label = F4(
-	function (plane, config, inner, point) {
-		var _v0 = config.ellipsis;
-		if (_v0.$ === 'Nothing') {
-			var withOverflowWrap = function (el) {
-				return config.hideOverflow ? A2(
-					$elm$svg$Svg$g,
-					_List_fromArray(
-						[
-							$terezka$elm_charts$Internal$Svg$withinChartArea(plane)
-						]),
-					_List_fromArray(
-						[el])) : el;
-			};
-			var uppercaseStyle = config.uppercase ? 'text-transform: uppercase;' : '';
-			var fontStyle = function () {
-				var _v5 = config.fontSize;
-				if (_v5.$ === 'Just') {
-					var size_ = _v5.a;
-					return 'font-size: ' + ($elm$core$String$fromInt(size_) + 'px;');
-				} else {
-					return '';
-				}
-			}();
-			var anchorStyle = function () {
-				var _v1 = config.anchor;
-				if (_v1.$ === 'Nothing') {
-					return 'text-anchor: middle;';
-				} else {
-					switch (_v1.a.$) {
-						case 'End':
-							var _v2 = _v1.a;
-							return 'text-anchor: end;';
-						case 'Start':
-							var _v3 = _v1.a;
-							return 'text-anchor: start;';
-						default:
-							var _v4 = _v1.a;
-							return 'text-anchor: middle;';
-					}
-				}
-			}();
-			return withOverflowWrap(
-				A4(
-					$terezka$elm_charts$Internal$Svg$withAttrs,
-					config.attrs,
-					$elm$svg$Svg$text_,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$class('elm-charts__label'),
-							$elm$svg$Svg$Attributes$stroke(config.border),
-							$elm$svg$Svg$Attributes$strokeWidth(
-							$elm$core$String$fromFloat(config.borderWidth)),
-							$elm$svg$Svg$Attributes$fill(config.color),
-							A6($terezka$elm_charts$Internal$Svg$position, plane, -config.rotate, point.x, point.y, config.xOff, config.yOff),
-							$elm$svg$Svg$Attributes$style(
-							A2(
-								$elm$core$String$join,
-								' ',
-								_List_fromArray(
-									['pointer-events: none;', fontStyle, anchorStyle, uppercaseStyle])))
-						]),
-					_List_fromArray(
-						[
-							A2($elm$svg$Svg$tspan, _List_Nil, inner)
-						])));
-		} else {
-			var ellipsis = _v0.a;
-			var xOffWithAnchor = function () {
-				var _v11 = config.anchor;
-				if (_v11.$ === 'Nothing') {
-					return config.xOff - (ellipsis.width / 2);
-				} else {
-					switch (_v11.a.$) {
-						case 'End':
-							var _v12 = _v11.a;
-							return config.xOff - ellipsis.width;
-						case 'Start':
-							var _v13 = _v11.a;
-							return config.xOff;
-						default:
-							var _v14 = _v11.a;
-							return config.xOff - (ellipsis.width / 2);
-					}
-				}
-			}();
-			var withOverflowWrap = function (el) {
-				return config.hideOverflow ? A2(
-					$elm$svg$Svg$g,
-					_List_fromArray(
-						[
-							$terezka$elm_charts$Internal$Svg$withinChartArea(plane)
-						]),
-					_List_fromArray(
-						[el])) : el;
-			};
-			var uppercaseStyle = config.uppercase ? A2($elm$html$Html$Attributes$style, 'text-transform', 'uppercase') : A2($elm$html$Html$Attributes$style, '', '');
-			var fontStyle = function () {
-				var _v10 = config.fontSize;
-				if (_v10.$ === 'Just') {
-					var size_ = _v10.a;
-					return A2(
-						$elm$html$Html$Attributes$style,
-						'font-size',
-						$elm$core$String$fromInt(size_) + 'px');
-				} else {
-					return A2($elm$html$Html$Attributes$style, '', '');
-				}
-			}();
-			var anchorStyle = function () {
-				var _v6 = config.anchor;
-				if (_v6.$ === 'Nothing') {
-					return A2($elm$html$Html$Attributes$style, 'text-align', 'center');
-				} else {
-					switch (_v6.a.$) {
-						case 'End':
-							var _v7 = _v6.a;
-							return A2($elm$html$Html$Attributes$style, 'text-align', 'right');
-						case 'Start':
-							var _v8 = _v6.a;
-							return A2($elm$html$Html$Attributes$style, 'text-align', 'left');
-						default:
-							var _v9 = _v6.a;
-							return A2($elm$html$Html$Attributes$style, 'text-align', 'center');
-					}
-				}
-			}();
-			return withOverflowWrap(
-				A4(
-					$terezka$elm_charts$Internal$Svg$withAttrs,
-					config.attrs,
-					$elm$svg$Svg$foreignObject,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$class('elm-charts__label'),
-							$elm$svg$Svg$Attributes$class('elm-charts__html-label'),
-							$elm$svg$Svg$Attributes$width(
-							$elm$core$String$fromFloat(ellipsis.width)),
-							$elm$svg$Svg$Attributes$height(
-							$elm$core$String$fromFloat(ellipsis.height)),
-							A6($terezka$elm_charts$Internal$Svg$position, plane, -config.rotate, point.x, point.y, xOffWithAnchor, config.yOff - 10)
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									A2($elm$html$Html$Attributes$attribute, 'xmlns', 'http://www.w3.org/1999/xhtml'),
-									A2($elm$html$Html$Attributes$style, 'white-space', 'nowrap'),
-									A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
-									A2($elm$html$Html$Attributes$style, 'text-overflow', 'ellipsis'),
-									A2($elm$html$Html$Attributes$style, 'height', '100%'),
-									A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
-									A2($elm$html$Html$Attributes$style, 'color', config.color),
-									fontStyle,
-									uppercaseStyle,
-									anchorStyle
-								]),
-							inner)
-						])));
-		}
-	});
 var $terezka$elm_charts$Chart$Attributes$zero = function (b) {
 	return A3($elm$core$Basics$clamp, b.min, b.max, 0);
 };
@@ -11170,10 +11234,29 @@ var $author$project$Main$main = A2(
 						]))
 				]),
 			$author$project$Main$data),
-			$terezka$elm_charts$Chart$xLabels(_List_Nil),
+			$terezka$elm_charts$Chart$xLabels(
+			_List_fromArray(
+				[
+					$terezka$elm_charts$Chart$Attributes$format($author$project$Main$labelFor)
+				])),
 			$terezka$elm_charts$Chart$yLabels(
 			_List_fromArray(
-				[$terezka$elm_charts$Chart$Attributes$withGrid]))
+				[$terezka$elm_charts$Chart$Attributes$withGrid])),
+			A4(
+			$terezka$elm_charts$Chart$labelAt,
+			$terezka$elm_charts$Chart$Attributes$middle,
+			function ($) {
+				return $.max;
+			},
+			_List_fromArray(
+				[
+					$terezka$elm_charts$Chart$Attributes$moveUp(20),
+					$terezka$elm_charts$Chart$Attributes$fontSize(24)
+				]),
+			_List_fromArray(
+				[
+					$elm$svg$Svg$text('Fruits')
+				]))
 		]));
 _Platform_export({'Main':{'init':_VirtualDom_init($author$project$Main$main)(0)(0)}});}(this));
 

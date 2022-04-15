@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Chart as C
 import Chart.Attributes as CA
+import Dict exposing (Dict)
 import Svg as S
 
 
@@ -16,8 +17,14 @@ main =
             , C.bar .kj [ CA.color "#339966" ]
             ]
             data
-        , C.xLabels []
+        , C.xLabels [ CA.format labelFor ]
         , C.yLabels [ CA.withGrid ]
+        , C.labelAt CA.middle
+            .max
+            [ CA.moveUp 20
+            , CA.fontSize 24
+            ]
+            [ S.text "Fruits" ]
         ]
 
 
@@ -27,3 +34,16 @@ data =
     , { x = 3, calories = 47.0, kj = 197.0 }
     , { x = 4, calories = 88.0, kj = 478.0 }
     ]
+
+
+labels =
+    Dict.fromList
+        [ ( 1, "Apple" )
+        , ( 2, "Avocado" )
+        , ( 3, "Clementine" )
+        , ( 4, "Chirimoya" )
+        ]
+
+
+labelFor x =
+    Maybe.withDefault "" (Dict.get x labels)
